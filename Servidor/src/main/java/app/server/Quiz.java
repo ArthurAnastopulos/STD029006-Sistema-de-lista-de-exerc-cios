@@ -15,7 +15,7 @@ public class Quiz
     public Quiz()
     {
         String currentDirectory = new File("").getAbsolutePath();
-        try( BufferedReader br = new BufferedReader(new FileReader(currentDirectory + "/src/main/resources/listaSTD.txt")))
+        try( BufferedReader br = new BufferedReader(new FileReader(currentDirectory + "/../../../../resources/listaSTD.txt")))
         {
             List<Question> questions = new ArrayList<Question>();
             String line;
@@ -72,6 +72,10 @@ public class Quiz
 
     public String getResult()
     {
-        return result.toString();
+        return this.result.toString();
+    }
+
+    public void clearResult(){
+        this.result.clearResult();
     }
 }

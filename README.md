@@ -31,15 +31,22 @@ cliente e do servidor sejam executados em diferentes contêineres em uma mesma r
 
 ## Compilando e executando o projeto
 
-W.I.P
+Para executar o programa execute o Docker Compose no root do Projeto com o seguinte comando:
+
+```
+docker compose run --rm client
+```
+
+## Lista de Usuário
+
+|Matricula|Senha|
+|---|---|
+|20211|123456|
+|20212|123456|
 
 ## Fluxograma Básico do projeto
 
 ![Fluxograma](/Imagens/FluxogramaQuizApp.png)
-
-## Rascunho de Classes UML
-
-![UML](/Imagens/RascunhoUML.png)
 
 ## Questões de Sistemas Distribuídos
 
@@ -81,7 +88,7 @@ W.I.P
 |---|---|
 |Aplicação Cliente|ok|
 |Aplicação Servidor|ok|
-|Permitir Ocorrer Interrupção|ok|
+|Permitir Ocorrer Interrupção durante a Lista|ok|
 |Questões de Sistemas Distribuídos|ok|
 |Lista de Alunos|ok|
-|Docker Compose|-|
+|Docker Compose|ok|

@@ -1,24 +1,37 @@
 package app.server;
-import app.AppDist;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Classe que implementa a interface do objeto distribuido
  */
-public class MainApp implements AppDist {
+public class MainApp {
     private final List<Aluno> alunos = this.genarateAlunoList();
+    private final HashMap<String, Integer> currentQuestion = new HashMap<String, Integer>();
     private Aluno aluno;
     private Quiz quiz_atual = null;
-    private int current_question = 0;
-    private int remaining_question = 5;
 
-    @Override
+   public String menuLogin()
+   { 
+       return("Menu\n" +
+            "Digite 1 para Logar;\n" +
+            "Digite 2 para Sair.\n");
+   }
+
+   public String menuApp()
+   { 
+       return("Menu\n" +
+            "Digite 1 Iniciar o questionário;\n" +
+            "Digite 2 Retomar o questionário;\n" +
+            "Digite 3 para Deslogar.\n");
+   }
+
     public boolean login(String matricula, String password)
     {
          try {
@@ -27,8 +40,11 @@ public class MainApp implements AppDist {
                  Aluno aux = this.alunos.get(i);
                  if((aux.isMatricula(matricula)) && (aux.isPassword(password)))
                  {
-                     this.aluno = aux;
-                     return true;
+                    this.aluno = aux;
+                    if(!this.currentQuestion.containsKey(aux.getMatricula())){
+                        this.currentQuestion.put(aux.getMatricula(), 0);
+                    }
+                    return true;
                  }
              }
              return false;
@@ -37,38 +53,37 @@ public class MainApp implements AppDist {
          }
     }
 
-    @Override
+    
     public void startQuiz()
     {
-        this.quiz_atual = this.aluno.getQuiz();
+        if(this.quiz_atual == null)
+            this.quiz_atual = this.aluno.getQuiz();
+        else{
+            this.quiz_atual.clearResult();
+            this.currentQuestion.put(this.aluno.getMatricula(), 0); 
+        }
     }
 
-    @Override
+    
     public boolean isQuizSet()
     {
         return this.quiz_atual != null;
     }
 
-    @Override
+    
     public void setNumber_question() {
-            this.current_question++;
-            this.remaining_question--;
+            this.currentQuestion.put(this.aluno.getMatricula(), this.currentQuestion.get(this.aluno.getMatricula()) + 1);
+
     }
 
-    @Override
-    public int getRemaining_question() {
-        return remaining_question;
-    }
-
-    @Override
     public String getQuestion(){
-        return this.quiz_atual.getQuestion(this.current_question);
+        return this.quiz_atual.getQuestion(this.currentQuestion.get(this.aluno.getMatricula()));
     }
 
-    @Override
+    
     public boolean isQuestionCorrect(int solution_idx)
     {
-        if(this.quiz_atual.checkSolution(this.current_question, solution_idx)) {
+        if(this.quiz_atual.checkSolution(this.currentQuestion.get(this.aluno.getMatricula()), solution_idx)) {
             this.setNumber_question();
             return true;
         }
@@ -76,28 +91,27 @@ public class MainApp implements AppDist {
         return false;
     }
 
-    @Override
+    
     public int getNumber_question() {
-        return current_question;
+        return this.currentQuestion.get(this.aluno.getMatricula());
     }
 
-    @Override
+    
     public String getResult()
     {
         return this.quiz_atual.getResult();
     }
 
-    @Override
+    
     public boolean isQuizOver()
     {
-        System.out.println("A" + String.valueOf(this.current_question));
-        return current_question < 5;
+        return this.currentQuestion.get(this.aluno.getMatricula()) < 5;
     }
 
     private List<Aluno> genarateAlunoList() {
         List<Aluno> alunos = new ArrayList<Aluno>();
         String currentDirectory = new File("").getAbsolutePath();
-        try( BufferedReader br = new BufferedReader(new FileReader(currentDirectory + "/src/main/resources/ALUNOS.txt")))
+        try( BufferedReader br = new BufferedReader(new FileReader(currentDirectory + "/../../../../resources/ALUNOS.txt")))
         {
             String line;
             List<String> matricula = new ArrayList<String>();

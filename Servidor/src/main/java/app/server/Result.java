@@ -50,4 +50,10 @@ public class Result {
     {
         return this.incorrect++;
     }
+
+    public void clearResult()
+    {
+        this.correct = 0;
+        this.incorrect = 0;
+    }
 }

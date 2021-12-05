@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  server:
+
+    build: Servidor/
+
+    ports:
+      - "12345"
+
+    network_mode: host
+
+    command: bash -c "./gradlew build && cd build/classes/java/main/ && java app.server.Servidor"
+
+
+  client:
+    
+    build: Cliente/
+
+    ports:
+      - "12345:12345"
+
+    network_mode: host
+
+    command: bash -c "./gradlew build && cd build/classes/java/main/ && java app.client.Cliente"
+
+    depends_on:
+      - server
