@@ -160,30 +160,30 @@ public class Servidor
             op = Integer.parseInt(fluxoEntrada.readUTF());
             if(op == 1){
                 if (app.isQuestionCorrect(1))
-                    fluxoSaida.writeUTF("Alternativa Correta! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 else
-                    fluxoSaida.writeUTF("Alternativa Errada! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 respondeu = false; 
             }
             else if(op == 2){
                 if (app.isQuestionCorrect(2))
-                    fluxoSaida.writeUTF("Alternativa Correta! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 else
-                    fluxoSaida.writeUTF("Alternativa Errada! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 respondeu = false; 
             }
             else if(op == 3){
                 if (app.isQuestionCorrect(3))
-                    fluxoSaida.writeUTF("Alternativa Correta! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 else
-                    fluxoSaida.writeUTF("Alternativa Errada! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 respondeu = false; 
             }
             else if(op == 4){
                 if (app.isQuestionCorrect(4))
-                    fluxoSaida.writeUTF("Alternativa Correta! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 else
-                    fluxoSaida.writeUTF("Alternativa Errada! Digite: a , para continuar \n");
+                    fluxoSaida.writeUTF("Alternativa Respondida! Digite: a , para continuar \n");
                 respondeu = false; 
             } 
             else
